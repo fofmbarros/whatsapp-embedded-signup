@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react"],
+  "categories": {
+    "correctness": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/whatsapp-onboarding.tsx"],
+      "rules": {
+        "react/refs": "off",
+        "react/set-state-in-effect": "off"
+      }
+    },
+    {
+      "files": ["tests/**/*.tsx"],
+      "rules": {
+        "react/no-children-prop": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "coverage/**", "tmp/**"]
+}

@@ -1,0 +1,33 @@
+name: CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.5"
+      - run: bun install --frozen-lockfile
+      - run: bun link
+      - run: bun install --cwd example --frozen-lockfile
+      - run: bun run lint
+      - run: bun run format:check
+      - run: bun run test
+      # Packing runs prepack, which builds the package.
+      - run: bun run test:package
+      - run: bun run typecheck
+      - run: bun run --cwd example build

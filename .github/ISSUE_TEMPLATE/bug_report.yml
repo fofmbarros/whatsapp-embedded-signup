@@ -1,0 +1,20 @@
+name: Bug report
+description: Report a reproducible problem with embedded signup.
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Package, React, and framework versions
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction and steps
+      description: Include signup mode, embedded signup version, browser, and expected versus actual behavior. Never share app secrets, access tokens, authorization codes, or customer data.
+    validations:
+      required: true
+  - type: textarea
+    id: errors
+    attributes:
+      label: Sanitized errors or screenshots
